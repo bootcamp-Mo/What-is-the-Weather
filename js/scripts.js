@@ -24,40 +24,46 @@ const btnSearch = document.querySelector('.bntSearch')
 // using HTML and CSS.
 
 const apiKey = '4cafa176959ccc9551eb2fd2139e4ce4'
-const apiWeather = 'https://openweathermap.org/forecast5'
+const apiWeather = 'https://api.openweathermap.org/data/2.5/weather'
 const city = 'CITY_NAME';
 
 
-// var xhr = new XMLHttpRequest();
-// xhr.open('GET', 'https://example.com/api/data', true);
-// xhr.onload = function() {
-//   if (this.status == 200) {
-//     var data = JSON.parse(this.responseText);
-//     // Store data in localStorage
-//     localStorage.setItem('data', JSON.stringify(data));
-//   }
-// };
-// xhr.send();
 
+/**======================
+ * *         api request
+ *========================**/
 
-
-const dataRetrieve = new XMLHttpRequest()
-dataRetrieve.open('GET', 'apiWeather', true) // .open explanation below
- dataRetrieve = function getWeatherDate (city, units) {
-    if (this.status == 200) {
-        city = JSON.parse(this.dataRetrieve)
-        localStorage.setItem('city', JSON.stringify(city))
-    } 
+function cityWeather (city) {
+    fetch(`${apiWeather}?q=${city}&appid=${apiKey}`)
+    .then(function(response) {return response.json() })
+    .then (function (data) {
+        console.log(data)
+    })
+    .catch(function () {
+    })
 }
-console.log(dataRetrieve)
+window.onload = function() {
+    cityWeather( 'Toronto' )
+  }
+console.log(cityWeather)
 
-// Retrieve data from localStorage
-var storedCity = localStorage.getItem('city');
-if (storedCity) {
-  var parsedData = JSON.parse(storedCity);
-  // Use parsedData as needed
-}
-console.log(s)
+// const dataRetrieve = new XMLHttpRequest()
+// dataRetrieve.open('GET', 'apiWeather', true) // .open explanation below
+//  dataRetrieve.onload = function getWeatherDate (city) {
+//     if (this.status == 200) {
+//         city = JSON.parse(this.dataRetrieve)
+//         localStorage.setItem('city', JSON.stringify(city))
+//     } 
+// }
+// console.log(dataRetrieve)
+
+// // Retrieve data from localStorage
+// var storedCity = localStorage.getItem('city');
+// if (storedCity) {
+//   var parsedData = JSON.parse(storedCity);
+//   // Use parsedData as needed
+// }
+// console.log(parsedData)
 // let searchHistory =  []
 // let searchInput = ''
 
@@ -117,4 +123,4 @@ console.log(s)
 // the onload function sets up a handler function to be called when the AJAX request is complete, 
 // and stores the parsed JSON data in the browser's local storage if the response has a status 
 // code of 200. If the response status code is not 200, the localStorage.setItem() method is not 
-// called, and the data is not stored in local storage.
+// called, and the data is not stored in local storage
