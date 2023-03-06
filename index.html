@@ -13,36 +13,32 @@
     <header>
         <h1>What is the Weather?</h1>
     </header>
-    <div class="citySearch" style="max-width: 1400px">
+    <div class="citySearch" ">
         <aside>
             <h1></h1>
-            <!-- some sort of form -->
             <div class="searchForm">
-                <form> <input type="text">
-                    <!-- look up how to make a form -->
-                </form>
+                <form class="searchHistory">
+                    <input type="text" name="cityName" placeholder="Enter city name...">
+                    <button class="btnSearch" type="submit">Search</button>
+                  </form>
             </div>
-            <button class="bntSearch">search</button>
-            <!-- todo list  -->
-            <div class="listCity">
+                <div id="cityHistory" class="flex-column flex-center">
+                    <h1 id="previousSearch">Previous Search</h1>
+                    <ul id="cityHistoryList"></ul>
+                </div>
             </div>
         </aside>
         <div class="wrapper">
             <div class="cityBox">
-                <!-- title
-                date
-                wind
-                humidity -->
+                <h2>CityName</h2>
+                <div id="weatherContainer"></div>
             </div>
             <div class="weatherBox">
-                <!-- 
-                    five day forecast
-                 -->
+
             </div>
         </div>
     </div>
     <script src="./js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
 </body>
-
 </html>
