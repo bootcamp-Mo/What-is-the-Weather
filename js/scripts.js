@@ -94,6 +94,7 @@ function listCityHistory(city) {
     cityButton.textContent = cityHistory[i];
 
     cityButton.addEventListener('click', function () {
+
       const cityData = JSON.parse(localStorage.getItem(cityHistory[i]));
       displayWeather(cityData);
 
@@ -107,7 +108,7 @@ function listCityHistory(city) {
 
 /**=======================
  **      Display content
- *  
+ **           weather
  *  
  *========================**/
 

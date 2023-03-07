@@ -20,7 +20,6 @@
 
 body {
     background-color: var(--color-light);
-    margin: 0 50px;
     font-family: var(--font-titles);
 }
 
@@ -28,10 +27,22 @@ header {
     font-family: var(--heading-font-family);
     font-size: 8rem;
     color: var(--color-light-brown);
+    display: block;
+}
+
+.hero-background {
+    background-image: url("simple-clouds.png");
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: bottom;
+    min-height: 40vh;
+    position: relative;
+    display: flex;
 }
 
 header h1 {
     color: var(--color-light-brown);
+    text-align: center;
 }
 
 .citySearch {
