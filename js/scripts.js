@@ -1,79 +1,71 @@
-// const inputField = document.getElementById(city)
-// const autocompleteList = document.getElementById(autocomplete-list)
 
 
 //const apiKey = process.env.apiKey
 
 const searchForm = document.querySelector('.searchForm');
-const btnSearch = document.querySelector('.bntSearch');
+const btnSearch = document.querySelector('.btnSearch');
 const apiKey = '4cafa176959ccc9551eb2fd2139e4ce4';
 const apiWeather = 'https://api.openweathermap.org/data/2.5/weather';
+const apiForecast = 'https://api.openweathermap.org/data/2.5/forecast'
 const city = 'CITY_NAME';
 
 
 
 function cityWeather(city) {
-    fetch(`${apiWeather}?q=${city}&appid=${apiKey}&units=imperial`)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            const parsedData = JSON.parse(JSON.stringify(data));
+  fetch(`${apiWeather}?q=${city}&appid=${apiKey}&units=imperial&cnt=5`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const parsedData = JSON.parse(JSON.stringify(data));
 
-            const temperature = parsedData.main.temp;
-            const wind = parsedData.wind.speed;
-            const humidity = parsedData.main.humidity;
-            const date = new Date(parsedData.dt * 1000);
-            const cityName = parsedData.name;
+      const temperature = parsedData.main.temp;
+      const wind = parsedData.wind.speed;
+      const humidity = parsedData.main.humidity;
+      const date = new Date(parsedData.dt * 1000).toLocaleDateString();
+      const cityName = parsedData.name;
 
-            localStorage.setItem(cityName, JSON.stringify({
-                temperature,
-                wind,
-                humidity,
-                date,
-                cityName
-            }));
+      localStorage.setItem(cityName, JSON.stringify({
+        temperature,
+        wind,
+        humidity,
+        date,
+        cityName
+      }));
 
-            console.log(`Temperature in ${cityName}: ${temperature}F`);
-            console.log(`Wind speed in ${cityName}: ${wind} m/s`);
-            console.log(`Humidity in ${cityName}: ${humidity}%`);
-            console.log(`Date in ${cityName}: ${date}`);
-            console.log(`${city}`);
+      console.log(`Temperature in ${cityName}: ${temperature}F`);
+      console.log(`Wind speed in ${cityName}: ${wind} m/s`);
+      console.log(`Humidity in ${cityName}: ${humidity}%`);
+      console.log(`Date in ${cityName}: ${date}`);
+      console.log(`${city}`);
 
-            displayWeather({
-                temperature,
-                wind,
-                humidity,
-                date,
-                cityName
-              });
-            
-            listCityHistory(cityName);
-        })
-        .catch(error => {
-            console.error(`Error: ${error}`);
-        });
-        
+      displayWeather({
+        temperature,
+        wind,
+        humidity,
+        date,
+        cityName
+      });
+
+      listCityHistory(cityName);
+    })
+    .catch(error => {
+      console.error(`Error: ${error}`);
+    });
+
 }
-window.onload = function () {
-    cityWeather('Portland');
-}
-
-
 
 /**=======================
  **              Button 
  **        click click click
  *  
  *========================**/
-
-
- searchForm.addEventListener('submit', function (event) {
-    event.preventDefault(); 
-    const cityName = event.target.elements.cityName.value;
-    cityWeather(cityName);
+searchForm.addEventListener('submit', function (event) {
+  event.preventDefault();
+  const cityName = event.target.elements.cityName.value;
+  cityWeather(cityName);
+  cityForecast(cityName);
 });
-
 
 /**=======================
  *
@@ -82,74 +74,130 @@ window.onload = function () {
  *========================**/
 
 
- let cityHistory = [];
+let cityHistory = [];
+function listCityHistory(city) {
 
- function listCityHistory(city) {
-   // Push the new city to the cityHistory array
-   cityHistory.push(city);
- 
-   // Store the updated city history array in localStorage
-   localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
- 
-   // Get a reference to the city history list element
-   const cityHistoryList = document.querySelector('#cityHistoryList');
- 
-   // Clear the existing content of the city history list
-   cityHistoryList.innerHTML = '';
- 
-   // Loop through the cityHistory array and create a button for each city
-   for (let i = 0; i < cityHistory.length; i++) {
-     const cityButton = document.createElement('button');
-     cityButton.classList.add('city-history');
-     cityButton.textContent = cityHistory[i];
- 
-     // Add a click event listener to the button
-     cityButton.addEventListener('click', function () {
-       // Get the city data from localStorage
-       const cityData = JSON.parse(localStorage.getItem(cityHistory[i]));
+  if (cityHistory.indexOf(city) !== -1) {
+    return;
+  }
+  cityHistory.push(city);
+
+  localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
+
+  const cityHistoryList = document.querySelector('#cityHistoryList');
+
+  cityHistoryList.innerHTML = '';
+
+  for (let i = 0; i < cityHistory.length; i++) {
+    const cityButton = document.createElement('button');
+    cityButton.classList.add('city-history');
+    cityButton.textContent = cityHistory[i];
+
+    cityButton.addEventListener('click', function () {
+      const cityData = JSON.parse(localStorage.getItem(cityHistory[i]));
       displayWeather(cityData);
- 
-       // Do something with the city data, such as display it on the page
-       console.log(cityData);
-     });
- 
-     // Append the button to the city history list
-     cityHistoryList.appendChild(cityButton);
-   }
- }
- 
+
+      console.log(cityData);
+    });
+
+    cityHistoryList.appendChild(cityButton);
+  }
+}
+
+
 /**=======================
  **      Display content
  *  
  *  
  *========================**/
 
+const weatherContainer = document.querySelector('#weatherContainer');
 
- function displayWeather(cityData) {
-    const weatherList = document.createElement('ul');
-    const temperatureItem = document.createElement('li');
-    temperatureItem.textContent = `Temperature: ${cityData.temperature}F`;
-    const windItem = document.createElement('li');
-    windItem.textContent = `Wind speed: ${cityData.wind} m/s`;
-    const humidityItem = document.createElement('li');
-    humidityItem.textContent = `Humidity: ${cityData.humidity}%`;
-    const dateItem = document.createElement('li');
-    dateItem.textContent = `Date: ${cityData.date}`;
-    const cityNameItem = document.createElement('li');
-    cityNameItem.textContent = `City Name: ${cityData.cityName}`;
-  
-    weatherList.appendChild(temperatureItem);
-    weatherList.appendChild(windItem);
-    weatherList.appendChild(humidityItem);
-    weatherList.appendChild(dateItem);
-    weatherList.appendChild(cityNameItem);
-  
-    // Display the list in the HTML
-    const weatherContainer = document.querySelector('#weatherContainer');
-    weatherContainer.innerHTML = '';
-    weatherContainer.appendChild(weatherList);
-  }
-displayWeather()
+function displayWeather(cityData) {
+  if (!cityData) return;
+  const weatherList = document.createElement('ul');
+
+  const temperatureItem = document.createElement('li');
+
+  temperatureItem.textContent = `Temperature: ${cityData.temperature}F`;
+
+  const windItem = document.createElement('li');
+
+  windItem.textContent = `Wind speed: ${cityData.wind} m/s`;
+
+  const humidityItem = document.createElement('li');
+
+  humidityItem.textContent = `Humidity: ${cityData.humidity}%`;
+
+  const dateItem = document.createElement('li');
+
+  dateItem.textContent = `Date: ${cityData.date}`;
+
+  const cityNameItem = document.createElement('li');
+
+  cityNameItem.textContent = `City Name: ${cityData.cityName}`;
+
+  weatherList.appendChild(temperatureItem);
+  weatherList.appendChild(windItem);
+  weatherList.appendChild(humidityItem);
+  weatherList.appendChild(dateItem);
+  weatherList.appendChild(cityNameItem);
+
+  weatherContainer.innerHTML = '';
+  weatherContainer.appendChild(weatherList);
+}
+
+
+/**=======================
+ *     five day forecast
+ *
+ *========================**/
+const weatherBox = document.querySelector('#weatherBox');
+
+function cityForecast(city) {
+  fetch(`${apiForecast}?q=${city}&appid=${apiKey}&units=imperial&cnt=6`)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const parsedData = JSON.parse(JSON.stringify(data));
+
+      const forecastList = document.createElement('ul');
+
+      const currentDate = new Date();
+      currentDate.setDate(currentDate.getDate() + 1);
+
+      parsedData.list.slice(1).forEach(function (forecast, index) {
+        const forecastItem = document.createElement('li');
+
+        const temperature = forecast.main.temp;
+        const wind = forecast.wind.speed;
+        const humidity = forecast.main.humidity;
+        const date = new Date(currentDate.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString();
+
+        forecastItem.innerHTML = `
+          <p>Date: ${date}</p>
+          <p>Temperature: ${temperature}F</p>
+          <p>Wind speed: ${wind} m/s</p>
+          <p>Humidity: ${humidity}%</p>
+        `;
+
+        forecastList.appendChild(forecastItem);
+      });
+
+      weatherBox.innerHTML = '';
+      weatherBox.appendChild(forecastList);
+    })
+    .catch(error => {
+      console.error(`Error: ${error}`);
+    });
+}
+
+window.onload = function () {
+  cityWeather('Portland')
+  cityForecast('Portland')
+}
+
 /**============================================
  **               Explanation
  *=============================================**/

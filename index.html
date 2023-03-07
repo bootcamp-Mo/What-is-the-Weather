@@ -13,32 +13,32 @@
     <header>
         <h1>What is the Weather?</h1>
     </header>
-    <div class="citySearch" ">
+    <div class="citySearch">
         <aside>
             <h1></h1>
             <div class="searchForm">
                 <form class="searchHistory">
                     <input type="text" name="cityName" placeholder="Enter city name...">
                     <button class="btnSearch" type="submit">Search</button>
-                  </form>
+                </form>
             </div>
-                <div id="cityHistory" class="flex-column flex-center">
-                    <h1 id="previousSearch">Previous Search</h1>
-                    <ul id="cityHistoryList"></ul>
-                </div>
+            <div id="cityHistory" class="flex-column flex-center">
+                <h1 id="previousSearch">Previous Search</h1>
+                <ul id="cityHistoryList"></ul>
             </div>
         </aside>
         <div class="wrapper">
             <div class="cityBox">
-                <h2>CityName</h2>
+                <h2 id="cityName"></h2>
                 <div id="weatherContainer"></div>
             </div>
-            <div class="weatherBox">
-
+            <div id="weatherBox">
             </div>
         </div>
     </div>
     <script src="./js/scripts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
 </body>
+
+
 </html>
