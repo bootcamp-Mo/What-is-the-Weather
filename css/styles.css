@@ -1,0 +1,66 @@
+:root {
+    --pad-main-h1: 1rem 4rem 1rem 4rem;
+    --font-size-h1: 3rem;
+    --color-light: #fff6e7;
+    --text-color-head: #585b5b;
+    --color-par: #757a7b;
+    --color-light-blue: #b3c5d3;
+    --color-light-brown: #594c47;
+    --color-box-bg: #c3c5c5;
+    --color-border: #594c46;
+    --heading-font-family: 'Averia Serif Libre', cursive;
+    --font-titles: 'Averia Libre', cursive;
+}
+
+* {
+    font-size: 80%;
+    margin: 0;
+
+}
+
+body {
+    background-color: var(--color-light);
+    margin: 0 50px;
+    font-family: var(--font-titles);
+}
+
+header {
+    font-family: var(--heading-font-family);
+    font-size: 8rem;
+    color: var(--color-light-brown);
+}
+
+header h1 {
+    color: var(--color-light-brown);
+}
+
+.citySearch {
+    display: flex;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchForm {
+    font-size: 2rem;
+}
+
+#cityHistory {
+    font-size: 2rem;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#weatherBox p {
+    display: flex;
+    flex-direction: column;
+}
+
+ul {
+    font-size: 2rem;
+}

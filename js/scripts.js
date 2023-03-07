@@ -149,7 +149,7 @@ function displayWeather(cityData) {
 
 
 /**=======================
- *     five day forecast
+ **      five day forecast
  *
  *========================**/
 const weatherBox = document.querySelector('#weatherBox');
