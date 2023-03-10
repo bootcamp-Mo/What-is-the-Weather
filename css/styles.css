@@ -5,16 +5,17 @@
     --text-color-head: #585b5b;
     --color-par: #757a7b;
     --color-light-blue: #b3c5d3;
-    --color-light-brown: #594c47;
+    --color-box-backgrounds: #594c46a7;
     --color-box-bg: #c3c5c5;
-    --color-border: #594c46;
+    --color-font: #594c46;
     --heading-font-family: 'Averia Serif Libre', cursive;
     --font-titles: 'Averia Libre', cursive;
 }
 
 * {
-    font-size: 80%;
+    font-size: 100%;
     margin: 0;
+    padding: 0;
 
 }
 
@@ -25,7 +26,7 @@ body {
 
 header {
     font-family: var(--heading-font-family);
-    font-size: 8rem;
+    font-size: 60px;
     color: var(--color-light-brown);
     display: block;
 }
@@ -38,11 +39,12 @@ header {
     min-height: 40vh;
     position: relative;
     display: flex;
+    justify-content: center;
 }
 
-header h1 {
-    color: var(--color-light-brown);
-    text-align: center;
+.hero h1 {
+    color: var(--color-font);
+    margin-top: 3rem;
 }
 
 .citySearch {
@@ -52,26 +54,111 @@ header h1 {
 aside {
     display: flex;
     flex-direction: column;
+    margin: 3rem 0 0 3rem;
+    background-color: var(--color-box-backgrounds);
+    margin: 10px 10px 0 10px;
+    border-radius: 1rem;
 }
 
 .searchForm {
-    font-size: 2rem;
+    font-size: 15px;
+}
+
+.cityName {
+    font-family: var(--heading-font-family);
+    color: var(--color-font);
+}
+
+input {
+    color: var(--color-font);
+    font-family: var(--heading-font-family);
+    background-color: var(--color-light);
+    border: none;
+    margin: 10px;
+    border-radius: 1rem;
+    padding: 3px;
+}
+
+.btnSearch {
+    background-color: var(--color-box-backgrounds);
+    color: var(--color-light);
+    border: none;
+    border-radius: 1rem;
+    padding: 10px;
+    font-size: 10px;
+    font-family: var(--heading-font-family);
 }
 
 #cityHistory {
-    font-size: 2rem;
+    font-size: 20px;
+}
+
+button.cityHistory {
+    border: none;
 }
 
 .wrapper {
-    display: flex;
-    flex-direction: column;
+    margin: 3rem 3rem 0 3rem;
+    width: 60rem;
+    background-color: var(--color-box-backgrounds);
+    margin: 10px 10px 0 10px;
+    border-radius: 1rem;
 }
 
-#weatherBox p {
+.wrapper ul {
+    list-style-type: none;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
-ul {
+.cityBox {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px 0 10px;
+}
+
+
+#weatherContainer {
+    color: var(--text-color-head);
+    box-shadow: #594c46a7;
+}
+
+h2 {
+    color: var(--color-font);
+}
+
+h3 {
     font-size: 2rem;
+    text-align: left;
+    color: var(--color-font);
+}
+
+.weatherListBox {
+    background-color: var(--color-box-backgrounds);
+    margin: 10px 10px 0 10px;
+    border-radius: 1rem;
+    padding: 10px;
+    color: var(--color-light-blue);
+}
+
+ul .forecastListBox {
+    font-size: 1rem;
+    list-style-type: none;
+    background-color: var(--color-box-backgrounds);
+    margin: 10px 10px 0 10px;
+    border-radius: 1rem;
+    color: var(--color-light-blue);
+    padding: 10px;
+}
+
+.forecastListBox {
+    margin-top: 2rem;
+}
+
+#weatherBox {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: max-content;
 }
