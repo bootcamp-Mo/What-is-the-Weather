@@ -9,6 +9,26 @@ const apiWeather = 'https://api.openweathermap.org/data/2.5/weather';
 const apiForecast = 'https://api.openweathermap.org/data/2.5/forecast'
 const city = 'CITY_NAME';
 
+const iconImageMap = {
+  '01d': 'sun.png',
+  '01n': 'sun.png',
+  '02d': 'overcast.png',
+  '02n': 'overcast.png',
+  '03d': 'overcast.png',
+  '03n': 'overcast.png',
+  '04d': 'overcast.png',
+  '04n': 'overcast.png',
+  '09d': 'rain.png',
+  '09n': 'rain.png',
+  '10d': 'rain.png',
+  '10n': 'rain.png',
+  '11d': 'lighting.png',
+  '11n': 'lighting.png',
+  '13d': 'snow.png',
+  '13n': 'snow.png',
+  '50d': 'fog.png',
+  '50n': 'fog.png',
+};
 
 
 const weatherContainer = document.querySelector('#weatherContainer');
@@ -23,6 +43,10 @@ function cityWeather(city) {
 
       const displayWeather = document.createElement('ul');
       const weatherItem = document.createElement('li');
+      const weatherIcon = parsedData.weather[0].icon;
+
+      const iconImage = iconImageMap[weatherIcon];
+      const imgSrc = `./image/${iconImage}`;
 
       const temperature = parsedData.main.temp;
       const wind = parsedData.wind.speed;
@@ -37,6 +61,7 @@ function cityWeather(city) {
             <p>Temperature: ${temperature}F</p>
             <p>Wind speed: ${wind} m/s</p>
             <p>Humidity: ${humidity}%</p>
+            <img src="${imgSrc}" alt="Weather Icon">
           </div>
         `;
       displayWeather.appendChild(weatherItem);
@@ -44,13 +69,13 @@ function cityWeather(city) {
       weatherContainer.innerHTML = '';
       weatherContainer.appendChild(displayWeather);
 
+      // Add city to history list and create button
       listCityHistory(cityName);
     })
     .catch(error => {
       console.error(`Error: ${error}`);
     });
 }
-
 /**=======================
  **              Button 
  **        click click click
@@ -61,6 +86,7 @@ searchForm.addEventListener('submit', function (event) {
   const cityName = event.target.elements.cityName.value;
   cityWeather(cityName);
   cityForecast(cityName);
+  event.target.elements.cityName.value = '';
 });
 
 /**=======================
@@ -72,15 +98,12 @@ searchForm.addEventListener('submit', function (event) {
 
 let cityHistory = [];
 function listCityHistory(city) {
-
   if (cityHistory.indexOf(city) !== -1) {
     return;
   }
   cityHistory.push(city);
 
   localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
-
-  const cityHistoryList = document.querySelector('#cityHistoryList');
 
   cityHistoryList.innerHTML = '';
 
@@ -90,16 +113,14 @@ function listCityHistory(city) {
     cityButton.textContent = cityHistory[i];
 
     cityButton.addEventListener('click', function () {
-      localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
-      const cityData = JSON.parse(localStorage.getItem(cityHistory[i]));
-      displayWeather(cityData);
-
-      console.log(cityData);
+      cityWeather(cityHistory[i]);
     });
 
     cityHistoryList.appendChild(cityButton);
   }
 }
+
+
 
 
 

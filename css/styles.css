@@ -49,19 +49,24 @@ header {
 
 .citySearch {
     display: flex;
+    justify-content: center;
+    margin: auto;
 }
 
 aside {
     display: flex;
     flex-direction: column;
-    margin: 3rem 0 0 3rem;
     background-color: var(--color-box-backgrounds);
     margin: 10px 10px 0 10px;
     border-radius: 1rem;
+    text-align: center;
+    padding: 1rem;
+    width: 200px;
 }
 
 .searchForm {
     font-size: 15px;
+
 }
 
 .cityName {
@@ -77,38 +82,36 @@ input {
     margin: 10px;
     border-radius: 1rem;
     padding: 3px;
+
 }
 
 .btnSearch {
     background-color: var(--color-box-backgrounds);
-    color: var(--color-light);
+    color: var(--color-light-blue);
     border: none;
     border-radius: 1rem;
     padding: 10px;
     font-size: 10px;
     font-family: var(--heading-font-family);
+    font-size: 1rem;
 }
 
 #cityHistory {
     font-size: 20px;
 }
 
-button.cityHistory {
-    border: none;
-}
-
 .wrapper {
     margin: 3rem 3rem 0 3rem;
-    width: 60rem;
+    width: 50%;
     background-color: var(--color-box-backgrounds);
     margin: 10px 10px 0 10px;
     border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .wrapper ul {
     list-style-type: none;
-    display: flex;
-    flex-direction: row;
 }
 
 .cityBox {
@@ -116,7 +119,6 @@ button.cityHistory {
     flex-direction: column;
     margin: 10px 10px 0 10px;
 }
-
 
 #weatherContainer {
     color: var(--text-color-head);
@@ -141,8 +143,17 @@ h3 {
     color: var(--color-light-blue);
 }
 
+.weatherListBox img {
+    width: 300px;
+}
+
+ul #cityHistoryList {
+    display: flex;
+    flex-direction: column;
+}
+
 ul .forecastListBox {
-    font-size: 1rem;
+    font-size: 15px;
     list-style-type: none;
     background-color: var(--color-box-backgrounds);
     margin: 10px 10px 0 10px;
@@ -156,9 +167,35 @@ ul .forecastListBox {
 }
 
 #weatherBox {
-    display: flex;
-    flex-wrap: wrap;
     padding: 10px;
     display: grid;
     grid-template-columns: max-content;
+}
+
+.city-history {
+    background-color: var(--color-box-backgrounds);
+    color: var(--color-light-blue);
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 3rem;
+    font-family: var(--heading-font-family);
+}
+
+.city-history:hover {
+    background-color: var(--color-light-blue);
+    color: var(--color-font);
+}
+
+@media only screen and (max-width: 1150px) {
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #weatherBox {
+        display: block;
+        justify-content: center;
+    }
 }
