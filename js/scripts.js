@@ -1,6 +1,6 @@
 
 
-//const apiKey = process.env.apiKey
+// const apiKey = process.env.apiKey
 
 const searchForm = document.querySelector('.searchForm');
 const btnSearch = document.querySelector('.btnSearch');
@@ -11,6 +11,8 @@ const city = 'CITY_NAME';
 
 
 
+const weatherContainer = document.querySelector('#weatherContainer');
+
 function cityWeather(city) {
   fetch(`${apiWeather}?q=${city}&appid=${apiKey}&units=imperial&cnt=5`)
     .then(function (response) {
@@ -19,40 +21,34 @@ function cityWeather(city) {
     .then(function (data) {
       const parsedData = JSON.parse(JSON.stringify(data));
 
+      const displayWeather = document.createElement('ul');
+      const weatherItem = document.createElement('li');
+
       const temperature = parsedData.main.temp;
       const wind = parsedData.wind.speed;
       const humidity = parsedData.main.humidity;
       const date = new Date(parsedData.dt * 1000).toLocaleDateString();
       const cityName = parsedData.name;
 
-      localStorage.setItem(cityName, JSON.stringify({
-        temperature,
-        wind,
-        humidity,
-        date,
-        cityName
-      }));
+      weatherItem.innerHTML = `
+          <h3 class="cityNameH3">${cityName}</h3>
+          <div class="weatherListBox">
+            <p>Date: ${date}</p>
+            <p>Temperature: ${temperature}F</p>
+            <p>Wind speed: ${wind} m/s</p>
+            <p>Humidity: ${humidity}%</p>
+          </div>
+        `;
+      displayWeather.appendChild(weatherItem);
 
-      console.log(`Temperature in ${cityName}: ${temperature}F`);
-      console.log(`Wind speed in ${cityName}: ${wind} m/s`);
-      console.log(`Humidity in ${cityName}: ${humidity}%`);
-      console.log(`Date in ${cityName}: ${date}`);
-      console.log(`${city}`);
-
-      displayWeather({
-        temperature,
-        wind,
-        humidity,
-        date,
-        cityName
-      });
+      weatherContainer.innerHTML = '';
+      weatherContainer.appendChild(displayWeather);
 
       listCityHistory(cityName);
     })
     .catch(error => {
       console.error(`Error: ${error}`);
     });
-
 }
 
 /**=======================
@@ -94,7 +90,7 @@ function listCityHistory(city) {
     cityButton.textContent = cityHistory[i];
 
     cityButton.addEventListener('click', function () {
-
+      localStorage.setItem('cityHistory', JSON.stringify(cityHistory));
       const cityData = JSON.parse(localStorage.getItem(cityHistory[i]));
       displayWeather(cityData);
 
@@ -105,48 +101,6 @@ function listCityHistory(city) {
   }
 }
 
-
-/**=======================
- **      Display content
- **           weather
- *  
- *========================**/
-
-const weatherContainer = document.querySelector('#weatherContainer');
-
-function displayWeather(cityData) {
-  if (!cityData) return;
-  const weatherList = document.createElement('ul');
-
-  const temperatureItem = document.createElement('li');
-
-  temperatureItem.textContent = `Temperature: ${cityData.temperature}F`;
-
-  const windItem = document.createElement('li');
-
-  windItem.textContent = `Wind speed: ${cityData.wind} m/s`;
-
-  const humidityItem = document.createElement('li');
-
-  humidityItem.textContent = `Humidity: ${cityData.humidity}%`;
-
-  const dateItem = document.createElement('li');
-
-  dateItem.textContent = `Date: ${cityData.date}`;
-
-  const cityNameItem = document.createElement('li');
-
-  cityNameItem.textContent = `City Name: ${cityData.cityName}`;
-
-  weatherList.appendChild(temperatureItem);
-  weatherList.appendChild(windItem);
-  weatherList.appendChild(humidityItem);
-  weatherList.appendChild(dateItem);
-  weatherList.appendChild(cityNameItem);
-
-  weatherContainer.innerHTML = '';
-  weatherContainer.appendChild(weatherList);
-}
 
 
 /**=======================
@@ -177,11 +131,13 @@ function cityForecast(city) {
         const date = new Date(currentDate.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString();
 
         forecastItem.innerHTML = `
-          <p>Date: ${date}</p>
-          <p>Temperature: ${temperature}F</p>
-          <p>Wind speed: ${wind} m/s</p>
-          <p>Humidity: ${humidity}%</p>
-        `;
+        <div class="forecastListBox"> 
+        <p>Date: ${date}</p>
+        <p>Temperature: ${temperature}F</p>
+        <p>Wind speed: ${wind} m/s</p>
+        <p>Humidity: ${humidity}%</p>
+        </div>
+        `
 
         forecastList.appendChild(forecastItem);
       });

@@ -17,20 +17,22 @@
 <body>
     <header>
         <div class="hero hero-background">
-            <h1>What is the Weather?</h1>
+            <h1 class="h1Title">What is the Weather?</h1>
         </div>
     </header>
     <div class="citySearch">
         <aside>
-            <h1></h1>
-            <div class="searchForm">
-                <form class="searchHistory">
-                    <input type="text" name="cityName" placeholder="Enter city name...">
-                    <button class="btnSearch" type="submit">Search</button>
-                </form>
+            <div class="flex justify-center">
+                <h2>Search with City Name</h2>
+                <div class="searchForm">
+                    <form class="searchHistory">
+                        <input type="text" name="cityName" class="relative" placeholder="Portland">
+                        <button class="btnSearch" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
             <div id="cityHistory" class="flex-column flex-center">
-                <h1 id="previousSearch">Previous Search</h1>
+                <h2 id="previousSearch">Previous Search</h2>
                 <ul id="cityHistoryList"></ul>
             </div>
         </aside>
@@ -44,6 +46,7 @@
         </div>
     </div>
     <script src="./js/scripts.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.7/dayjs.min.js"></script>
 </body>
 
