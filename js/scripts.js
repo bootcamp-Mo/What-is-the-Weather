@@ -57,7 +57,7 @@ function cityWeather(city) {
       weatherItem.innerHTML = `
           <h3 class="cityNameH3">${cityName}</h3>
           <div class="weatherListBox">
-            <p>Date: ${date}</p>
+            <p class="cityDate">Date: ${date}</p>
             <p>Temperature: ${temperature}F</p>
             <p>Wind speed: ${wind} m/s</p>
             <p>Humidity: ${humidity}%</p>
