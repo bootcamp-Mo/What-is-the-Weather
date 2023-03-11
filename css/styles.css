@@ -1,12 +1,10 @@
 :root {
-    --pad-main-h1: 1rem 4rem 1rem 4rem;
-    --font-size-h1: 3rem;
     --color-light: #fff6e7;
     --text-color-head: #585b5b;
-    --color-par: #757a7b;
+
     --color-light-blue: #b3c5d3;
     --color-box-backgrounds: #594c46a7;
-    --color-box-bg: #c3c5c5;
+
     --color-font: #594c46;
     --heading-font-family: 'Averia Serif Libre', cursive;
     --font-titles: 'Averia Libre', cursive;
@@ -61,11 +59,11 @@ aside {
     border-radius: 1rem;
     text-align: center;
     padding: 1rem;
-    width: 200px;
+    width: 300px;
 }
 
 .searchForm {
-    font-size: 15px;
+    font-size: 25px;
 
 }
 
@@ -82,7 +80,8 @@ input {
     margin: 10px;
     border-radius: 1rem;
     padding: 3px;
-
+    width: 200px;
+    text-align: center;
 }
 
 .btnSearch {
@@ -91,23 +90,23 @@ input {
     border: none;
     border-radius: 1rem;
     padding: 10px;
-    font-size: 10px;
+    font-size: 25px;
     font-family: var(--heading-font-family);
     font-size: 1rem;
 }
 
 #cityHistory {
-    font-size: 20px;
+    font-size: 35px;
 }
 
 .wrapper {
-    margin: 3rem 3rem 0 3rem;
-    width: 50%;
+    width: 1000px;
     background-color: var(--color-box-backgrounds);
     margin: 10px 10px 0 10px;
     border-radius: 1rem;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
 
 .wrapper ul {
@@ -127,12 +126,15 @@ input {
 
 h2 {
     color: var(--color-font);
+    font-size: 30px;
+    margin-bottom: 15px;
 }
 
 h3 {
-    font-size: 2rem;
+    font-size: 50px;
     text-align: left;
     color: var(--color-font);
+    margin-left: 25px;
 }
 
 .weatherListBox {
@@ -141,19 +143,28 @@ h3 {
     border-radius: 1rem;
     padding: 10px;
     color: var(--color-light-blue);
+    font-size: 25px;
 }
 
 .weatherListBox img {
     width: 300px;
 }
 
-ul #cityHistoryList {
+#cityHistoryList {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+
+}
+
+ul #cityHistoryList {
+    display: flex;
+    flex-direction: row;
+
 }
 
 ul .forecastListBox {
-    font-size: 15px;
+    font-size: 25px;
     list-style-type: none;
     background-color: var(--color-box-backgrounds);
     margin: 10px 10px 0 10px;
@@ -168,19 +179,20 @@ ul .forecastListBox {
 
 #weatherBox {
     padding: 10px;
-    display: grid;
-    grid-template-columns: max-content;
 }
 
 .city-history {
     background-color: var(--color-box-backgrounds);
     color: var(--color-light-blue);
     border: none;
-    padding: 10px;
+    padding: 15px;
     margin: 5px;
     cursor: pointer;
-    border-radius: 3rem;
+    border-radius: 1rem;
     font-family: var(--heading-font-family);
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .city-history:hover {
