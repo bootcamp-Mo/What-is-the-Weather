@@ -28,4 +28,3 @@ https://bootcamp-mo.github.io/What-is-the-Weather/
 
 
     ![fullScreen](https://user-images.githubusercontent.com/122568039/224566831-f47a797a-f75b-4856-b6f5-6cdd340a2b93.jpeg)
-![smallerScreen](https://user-images.githubusercontent.com/122568039/224566835-64366ef3-7576-46b6-b27c-07b0cee9cc69.jpeg)
