@@ -27,4 +27,5 @@ THEN I am again presented with current and future conditions for that city
 https://bootcamp-mo.github.io/What-is-the-Weather/
 
 
-    ![fullScreen](https://user-images.githubusercontent.com/122568039/224566831-f47a797a-f75b-4856-b6f5-6cdd340a2b93.jpeg)
+
+![fullScreen](https://user-images.githubusercontent.com/122568039/224566903-f112737d-f760-4e76-a016-abcd93f52f14.jpeg)
